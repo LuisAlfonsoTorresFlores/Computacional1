@@ -1,0 +1,203 @@
+\documentclass[a4paper,12pt]{article} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb} 
+\usepackage{graphicx} 
+\usepackage{hyperref} 
+\usepackage{wrapfig}
+\usepackage{enumitem}
+\usepackage{blindtext}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{eurosym}
+\usepackage{color}
+\usepackage{titling}
+\usepackage{amssymb, amsmath, amsbsy} % simbolitos
+ \usepackage{upgreek} % para poner letras griegas sin cursiva
+ \usepackage{cancel} % para tachar
+ \usepackage{mathdots} % para el comando \iddots
+ \usepackage{mathrsfs} % para formato de letra
+\usepackage{stackrel} % para el comando \stackbin
+\usepackage{lipsum}
+\usepackage{tocbibind}
+\usepackage[T1]{fontenc}
+\usepackage[left=3cm,right=3cm,top=3cm,bottom=4cm]{geometry}
+\pagestyle{fancy}
+%%%%%%%%%%%%%%%%%%%%%% CABECERAS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\hsp}{\hspace{20pt}}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\headheight=50pt
+\newcommand{\vacio}{\textcolor{white}{holacaracola}}
+%%% NUMERACION DE ECUACIONES
+\renewcommand{\theequation}{\thesection.\arabic{equation}}
+% COLOR AZUL PARA TEXTOS EN PORTADA
+\definecolor{azulportada}{rgb}{0.16, 0.32, 0.75}
+% Azul para textos de headings
+\definecolor{azulinterior}{rgb}{0.0, 0.2, 0.6}
+
+%%%%%%%%%%%%%%%%%%% DATOS DEL PROYECTO %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Iniciándose en Python}
+\author{}
+\newcommand{\director}{Carlos Lizárraga Celaya}
+
+\begin{document}
+\begin{titlepage}
+\begin{center}
+\vspace{1cm}
+
+\includegraphics[width=5.5cm]{unison-logo.png}
+\\[0.5cm]
+{\fontfamily{phv}\fontsize{24}{6}\selectfont{UNIVERSIDAD DE SONORA}}\\
+[1em]
+{\fontfamily{phv}\fontsize{16}{5}\selectfont{DEPARTAMENTO DE FÍSICA}}\\
+[4em]
+\textcolor{azulportada}
+{\fontfamily{phv}\fontsize{30}{5}\selectfont{\textsc{\thetitle}}}\\
+% Autor del trabajo de investigación
+[1cm]
+{\fontfamily{phv}\fontsize{16}{5}\selectfont{Alumno:}}\\
+[0.2cm]
+%Equipo sfdsfshkfhsfhsjfs
+{\fontfamily{phv}\fontsize{14}{5}\selectfont{Luis Alfonso Torres Flores}}\\
+[1cm]
+%{\Huge\textbf{\thetitle}}\\
+{\fontfamily{phv}\fontsize{16}{5}\selectfont{Profesor}}\\
+[0.2cm]
+{\fontfamily{phv}\fontsize{16}{5}\selectfont{\director}}\\
+[4.5cm]
+{\fontfamily{phv}\fontsize{14}{5}\selectfont{24 de Febrero de 2017}}\\
+[4cm]
+\end{center}
+\restoregeometry
+\end{titlepage}
+
+\newpage
+%%%Encabezamiento y pie de página
+\renewcommand{\headrulewidth}{0.5pt}
+\fancyhead[R]{
+	\textcolor{azulinterior}{\fontfamily{phv}\fontsize{14}{4}\selectfont{\textbf{\thetitle}}}\\
+\textcolor{azulportada}{\fontfamily{phv}\fontsize{10}{3}\selectfont{Curso de Introducción a la Física Moderna I}}\\
+{\fontfamily{phv}\fontsize{10}{3}\selectfont{\theauthor}}}
+\fancyhead[L]{\vacio}
+
+\newpage
+\tableofcontents
+\newpage
+%-------------------------------------------------------
+\section{Resumen}
+\noindent
+Se limpiaron los archivos para poder trabajar con ellos, en esta ocasión solo se utilizaron los datos finales que vendrían siendo el CAPE y el agua precipitable, los cuales se detallaron en una tabla y se graficaron.
+%----------------------------------------------------
+\section{Introducción}
+\noindent
+Tal y como en la anterior actividad, se volvió a hacer uso de Emacs para limpiar los datos. Ahora nos interesa los valores de las variables CAPE y el agua precipitable que en cada día de medición aparecen al final del archivo, sin embargo, estaremos trabajando con una enorme cantidad de datos, puesto que hablamos de uno de cada uno de ellos estaríamos hablando de 365 líneas de CAPE, 365 líneas de agua precipitable y cada uno con su respectiva línea correspondiente a la fecha, lo cual resulta algo agobiante trabajar de forma manual, además que una pérdida de tiempo. \\
+
+\noindent
+Obtendremos algunos datos representativos de la tabla que obtendremos, y si bien son demasiados valores que no podríamos mostrarlos todos para evitar llenar muchas páginas con cientos de datos, dispondremos a mostrar solo un par de decenas de datos y a mostrar los gráficos de barra de dichos datos y un diagrama de caja en el cual observaremos la distribución de datos.
+
+\newpage
+%----------------------------------------------------
+\section{Tablas}
+\noindent
+A continuación, se enlistan algunos de los datos que se manejaran para esta actividad, solo se mostrara el mes de enero, puesto que los datos son cientos y seria demasiados, solo se verán algunos para darse una idea de cómo es su distribución numérica.
+
+\begin{center}
+\begin{tabular}{|l|c|r|}
+\hline
+ Fecha  &   CAPE & Agua precipitable \\ \hline
+ 01 Jan 2016 </H2> &  0  &  39.86 \\ \hline
+ 02 Jan 2016</H2>&  0.00 & 39.87\\ \hline
+ 03 Jan 2016</H2> & 0.00 &  38.34\\ \hline
+  04 Jan 2016</H2>&  0.00 &  14.90\\ \hline
+  05 Jan 2016</H2>  & 0.00  & 16.49\\ \hline
+ 06 Jan 2016</H2> & 0.00 &    28.25\\ \hline
+ 07 Jan 2016</H2>&  1078.95 &   32.20\\ \hline
+ 08 Jan 2016</H2>  & 306.22 &   19.03\\ \hline
+ 09 Jan 2016</H2> &  748.45&   17.97\\ \hline
+ 10 Jan 2016</H2>&     0.00 &  11.37\\ \hline
+ 11 Jan 2016</H2>    & 0.00 & 10.49\\ \hline
+ 12 Jan 2016</H2>   &  0.00  & 26.48\\ \hline
+ 13 Jan 2016</H2>  &   0.00 & 23.02 \\ \hline
+ 14 Jan 2016</H2> &   61.50  & 33.29\\ \hline
+  15 Jan 2016</H2>&   663.25   & 23.51\\ \hline
+ 16 Jan 2016</H2>   &  0.00    &8.22\\ \hline
+ 17 Jan 2016</H2>   &  0.00   & 11.20\\ \hline
+ 18 Jan 2016</H2>  &   0.00   & 12.03\\ \hline
+ 19 Jan 2016</H2> &    0.00  & 15.39\\ \hline
+ 20 Jan 2016</H2>&     0.18   & 21.20\\ \hline
+ 21 Jan 2016</H2>  & 922.71  &  24.32\\ \hline
+ 22 Jan 2016</H2> &    0.00 &12.20\\ \hline
+ 23 Jan 2016</H2>&     0.00   & 8.07\\ \hline
+ 24 Jan 2016</H2>&     0.00 &  9.59\\ \hline
+ 25 Jan 2016</H2>&     3.17  & 16.10\\ \hline
+ 26 Jan 2016</H2>  &  50.93   & 25.49\\ \hline
+ 27 Jan 2016</H2> &    0.00  & 26.88\\ \hline
+ 28 Jan 2016</H2> &    0.00  &  18.40\\ \hline
+ 29 Jan 2016</H2> &    0.00 &  8.84\\ \hline
+ 30 Jan 2016</H2> &    0.00  & 8.74\\ \hline
+
+\end{tabular}
+\end{center}
+
+\noindent
+Nuestro valor “CAPE” contiene muchos valores iguales a cero por lo que podemos observar, aunque cuando llega a tener alguno es, al menos, numéricamente bastante alto, aunque este hecho lo observaremos en las gráficas que se presentaran posteriormente, aunque podemos creer que, especialmente el diagrama de caja, mostraran varios datos atípicos.\\
+
+\noindent
+Ahora podremos observar una tabla que nos muestra algunos datos estadísticos de nuestra variable “CAPE” y de “Agua precipitable”. Aunque aquí nos fijaremos un poco más en los datos del mínimo, máximo y los cuartiles obtenidos por la gráfica.
+
+\begin{center}
+\begin{tabular}{|l|r|c|}
+\hline
+Info & CAPE &	Agua precipitable\\ \hline
+count &	364.000000 &	364.000000\\ \hline
+mean &1166.184451 &	35.477363\\ \hline
+std &	1064.990493 &	12.803997\\ \hline
+min	& 0.000000 &	1.080000\\ \hline
+25\% &	2.047500 &	26.472500\\ \hline
+50\% &	1118.090000 &	37.660000\\ \hline
+75\% &	1968.915000 &	45.537500\\ \hline
+max &	5692.380000 &	62.500000\\ \hline
+\end{tabular}
+\end{center}
+
+\noindent
+En el caso de CAPE tenemos que nuestro valor mínimo es de cero, pero nuestro máximo es de 5692.38 y el percentil 50 de 1118.09. Esto nos permite intuir que su respectiva grafica está cargada a la izquierda que, a la derecha, mostrando una mayor dispersión de datos a la derecha. En el percentil 25 podemos notar que es un valor realmente bajo, con una diferencia de poco más de dos unidades con el mínimo, mientras que la diferencia del percentil 75 con el máximo es enorme. En el diagrama de cajas se intuye que se verá como una pequeña cola a la izquierda gracias a la concentración de datos y una muy larga a la derecha por mostrar varios datos atípicos.
+
+%----------------------------------------------------
+\newpage
+\section{Graficas}
+\noindent
+A continuación, observaremos la gráfica de barras correspondiente al CAPE junto con su diagrama de barras. 
+
+\begin{center}
+\includegraphics[width=11cm]{CAPE.png}
+\end{center}
+
+\begin{center}
+\includegraphics[width=11cm]{Diagrama_de_caja_del_CAPE.png}
+\end{center}
+
+\noindent
+Tal y como se había dicho antes, se ve una enorme concentración a la izquierda de los datos a comparación de su lado derecho. Ya lo habíamos observado en la tabla de la anterior sección. Hay una enorme concentración de datos del CAPE a la izquierda, repitiéndose en varias ocasiones los valores iguales a cero o muy cercanos a él por lo que el percentil 25 no era extraño que resultara en apenas poco más de dos unidades. \\
+
+\noindent
+A continuación, observaremos los datos de agua precipitable tanto en forma de gráficos de barra como en un diagrama de caja.
+
+\begin{center}
+\includegraphics[width=11cm]{Agua_precipitable.png}
+\end{center}
+
+\begin{center}
+\includegraphics[width=11cm]{Diagrama_de_caja.png}
+\end{center}
+
+\noindent
+Como podemos observar en el diagrama de barras, notamos una mucho mejor distribución que en el caso de CAPE, pero aun con esto hay una concentración de datos hacia la derecha, cosa que queda bien representada en el diagrama de caja. Podemos notar como la cola izquierda o como es en este caso, la cola inferior, es más larga que la cola superior lo que nos indica una mayor dispersión de datos por la izquierda que por la derecha de los datos. Lo que podemos decir sobre lo que nos representa la gráfica, es fue más común encontrarse entre los valores superiores a aproximadamente 36, que los valores inferiores a 36. Si se mantiene esto podríamos darnos una idea de que observaríamos en años posteriores si se mantienen las mismas condiciones.
+
+
+
+\end{document}
