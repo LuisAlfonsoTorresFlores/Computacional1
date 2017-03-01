@@ -1,0 +1,201 @@
+\documentclass[a4paper,12pt]{article} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb} 
+\usepackage{graphicx} 
+\usepackage{hyperref} 
+\usepackage{wrapfig}
+\usepackage{enumitem}
+\usepackage{blindtext}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{eurosym}
+\usepackage{color}
+\usepackage{titling}
+\usepackage{amssymb, amsmath, amsbsy} % simbolitos
+ \usepackage{upgreek} % para poner letras griegas sin cursiva
+ \usepackage{cancel} % para tachar
+ \usepackage{mathdots} % para el comando \iddots
+ \usepackage{mathrsfs} % para formato de letra
+\usepackage{stackrel} % para el comando \stackbin
+\usepackage{lipsum}
+\usepackage{tocbibind}
+\usepackage[T1]{fontenc}
+\usepackage[left=3cm,right=3cm,top=3cm,bottom=4cm]{geometry}
+\pagestyle{fancy}
+%%%%%%%%%%%%%%%%%%%%%% CABECERAS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\hsp}{\hspace{20pt}}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\headheight=50pt
+\newcommand{\vacio}{\textcolor{white}{holacaracola}}
+%%% NUMERACION DE ECUACIONES
+\renewcommand{\theequation}{\thesection.\arabic{equation}}
+% COLOR AZUL PARA TEXTOS EN PORTADA
+\definecolor{azulportada}{rgb}{0.16, 0.32, 0.75}
+% Azul para textos de headings
+\definecolor{azulinterior}{rgb}{0.0, 0.2, 0.6}
+
+%%%%%%%%%%%%%%%%%%% DATOS DEL PROYECTO %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Visualizando datos con Pandas y Matplotlib}
+\author{}
+\newcommand{\director}{Carlos Lizárraga Celaya}
+
+\begin{document}
+\begin{titlepage}
+\begin{center}
+\vspace{1cm}
+
+\includegraphics[width=5.5cm]{unison-logo.png}
+\\[0.5cm]
+{\fontfamily{phv}\fontsize{24}{6}\selectfont{UNIVERSIDAD DE SONORA}}\\
+[1em]
+{\fontfamily{phv}\fontsize{16}{5}\selectfont{DEPARTAMENTO DE FÍSICA}}\\
+[4em]
+\textcolor{azulportada}
+{\fontfamily{phv}\fontsize{30}{5}\selectfont{\textsc{\thetitle}}}\\
+% Autor del trabajo de investigación
+[1cm]
+{\fontfamily{phv}\fontsize{16}{5}\selectfont{Alumno:}}\\
+[0.2cm]
+%Equipo sfdsfshkfhsfhsjfs
+{\fontfamily{phv}\fontsize{14}{5}\selectfont{Luis Alfonso Torres Flores}}\\
+[1cm]
+%{\Huge\textbf{\thetitle}}\\
+{\fontfamily{phv}\fontsize{16}{5}\selectfont{Profesor}}\\
+[0.2cm]
+{\fontfamily{phv}\fontsize{16}{5}\selectfont{\director}}\\
+[4.5cm]
+{\fontfamily{phv}\fontsize{14}{5}\selectfont{27 de Febrero de 2017}}\\
+[4cm]
+\end{center}
+\restoregeometry
+\end{titlepage}
+
+\newpage
+%%%Encabezamiento y pie de página
+\renewcommand{\headrulewidth}{0.5pt}
+\fancyhead[R]{
+	\textcolor{azulinterior}{\fontfamily{phv}\fontsize{14}{4}\selectfont{\textbf{\thetitle}}}\\
+\textcolor{azulportada}{\fontfamily{phv}\fontsize{10}{3}\selectfont{Curso de Introducción a la Física Moderna I}}\\
+{\fontfamily{phv}\fontsize{10}{3}\selectfont{\theauthor}}}
+\fancyhead[L]{\vacio}
+
+\newpage
+\tableofcontents
+\newpage
+%------------------------------------------------
+\section{Resumen}
+\noindent
+Aquí se hizo el uso de Emacs para limpiar y ordenar datos, pero más que nada matplotlib y pandas para poder desarrollar de forma automática las tablas y especialmente las gráficas de algunas variables de la atmosfera.
+%------------------------------------------------
+\section{Introducción}
+\noindent
+Se puede mostrar de distintas maneras varios valores que corresponden a la atmosfera y cada una de sus capas. Como bien será en este trabajo, nos centraremos en la presión, temperatura y temperatura del roció y el cómo van variando con respecto a la altura. Hasta ahora hemos usado graficas de barra para describir a los datos de forma gráfica e inclusive se ha utilizado diagramas de caja para descubrir sus valores. En este caso utilizaremos curvas para mostrar la forma en que los datos se distribuían al cambiar la altura. Debemos de tomar en cuenta que en esta ocasión se manejan menores datos que en ocasiones pasadas, sin embargo, siguen siendo una cantidad un tanto considerable.\\
+
+\noindent
+Mostraremos una mayor proporción de los datos, enfocándonos únicamente en, como ya se había mencionado, la altura, presión, temperatura y temperatura del roció, al igual que las gráficas serán individuales y una última de comparación entre las temperaturas, finalizando con una gráfica de tephi
+
+%------------------------------------------------
+\newpage
+\section{Tablas}
+\noindent
+A continuación, podremos observar una tabla llena de datos con los que se graficaran sus respectivas curvas para poder observar los cambios:\\
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+PRES &	TEMP&	DWPT \\ \hline
+1017.0&	15.2&	15.0\\ \hline
+1000.0&	18.0&	16.7\\ \hline
+999.0	&18.0&	16.6\\ \hline
+989.0&	18.0&	16.0\\ \hline
+982.0&	18.9&	12.9\\ \hline
+975.0&	19.8&	9.8\\ \hline
+960.0&	19.4&	8.4\\ \hline
+952.0&	20.8&	2.8\\ \hline
+947.8&	20.3&	2.9\\ \hline
+937.0&	19.0&	3.0\\ \hline
+925.0&	19.4&	-0.6\\ \hline
+923.0&	19.4&	-0.6\\ \hline
+914.8&	18.9&	-1.5\\ \hline
+902.0&	18.0&	-3.0\\ \hline
+882.6&	16.2&	-3.7\\ \hline
+850.0&	13.2&	-4.8\\ \hline
+820.8&	10.3&	-5.0\\ \hline
+796.0&	7.8	 &   -5.2\\ \hline
+791.2&	7.6	  &  -9.2\\ \hline
+791.0&	7.6	&    -9.4\\ \hline
+768.0&	5.8	 &   -11.2\\ \hline
+762.4&	5.8	 &   -14.4\\ \hline
+761.0&	5.8	 &   -15.2\\ \hline
+734.4&	4.1	 &   -21.7\\ \hline
+733.0&	4.0	 &   -22.0\\ \hline
+700.0&	1.0	 &   -29.0\\ \hline
+666.0&	-1.9&	-33.9\\ \hline
+655.1&	-2.3&	-36.5\\ \hline
+630.4&	-3.4&	-42.7\\ \hline
+618.0&	-3.9&	-45.9\\ \hline
+\end{tabular}
+\end{center}
+
+\noindent
+Como bien podemos observar, la presión va disminuyendo por lo que de ella podríamos esperar una curva con forma de una exponencial inversa. Por el contrario, ambas temperaturas se miran con ciertos cambios, que, si bien si están reduciéndose, tiene una menor uniformidad dichos valores. Ahora procederemos a obtener algunos valores estadísticos de estas columnas.
+
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Info & PRES & HGHT & TEMP \\ \hline
+count&	120&	120&	120\\ \hline
+mean&	348.569167&	12465.65&	-35.475833\\ \hline
+std	&334.007308&	8846.841007&	34.949063\\ \hline
+min&	13.5&	7&	-79.9\\ \hline
+25\% &	53.1&	4230&	-68.525\\ \hline
+50\% &	194.5 &	12532.5&	-49.45\\ \hline
+75\% &	609.375 &	20224.75&	-3.275\\ \hline
+max	& 1017&	28734&	20.8\\ \hline
+\end{tabular}
+\end{center}
+
+\noindent
+Como podemos observar, partiendo de cada uno. La presión se muestra más cargada a la izquierda, es decir cuando apenas va subiendo el dispositivo, por lo que es normal ver este comportamiento, llegado a un punto se nota que hay una mayor dispersión y una presión bastante baja. Si hablamos de la temperatura, notamos enormes saltos entre los percentiles, que si bien no son uniformes al menos se puede observar cómo va modificándose gradualmente.
+
+%------------------------------------------------
+\newpage
+\section{Graficas}
+\noindent
+En nuestra grafica de presión contra altura, podemos observar como esta variable resulta ir disminuyendo con un comportamiento exponencial, aunque si bien matemáticamente nunca tocaría el cero, de forma física se puede considerar un punto como cero al ser realmente bajo.
+
+\begin{center}
+\includegraphics[width=11cm]{presion_vs_altura.png}
+\end{center}
+
+\noindent
+Como podemos observar con nuestra temperatura, aquí se encuentra un tanto distorsionado y alejado de una curva, sin embargo, aún podemos observar su comportamiento, en el que comienza a disminuir conforme va pasando por las capas de la atmosfera, para luego elevarse la temperatura un poco en la última parte de su trayecto.
+\begin{center}
+\includegraphics[width=11cm]{temperatura_vs_altura.png}
+\end{center}
+
+\noindent
+A diferencia de la temperatura, la temperatura del roció muestra una caída mucho más rápida y una elevación al final mucho menor. Pero podemos notar como a pesar de estas diferencias, muestran el mismo cambio de aumento en un punto similar, indicándonos que esto también ocurre cuando se encuentra atravesando una de las partes de su trayecto y la temperatura junto con la temperatura del roció tienen cierta similitud.
+\begin{center}
+\includegraphics[width=11cm]{rocio_vs_altura.png}
+\end{center}
+
+\noindent
+Con esta grafica donde colocamos ambas temperaturas, siendo la azul la temperatura con respecto a la altura y la línea verde nuestra temperatura de roció con respecto a la altura, observamos mucho mejor la similitud anterior mencionada, puesto que observamos como decrece en los mismos tramos y como crece en el mismo tramo final, aunque si bien, claro está que no son idénticas, pero sí muy parecidas.
+\begin{center}
+\includegraphics[width=11cm]{doble_temp_vs_altura.png}
+\end{center}
+
+\newpage
+\noindent
+A continuación, podremos observar un tefigrama de Brownsville, utilizando los datos del 21 de febrero del 2017. Podemos apreciar los cambios con respecto a la altura y que funciona como diagrama termodinámico. Esta grafica es comúnmente utilizada para análisis de la atmosfera puesto, como se aprecia, con la correcta interpretación sobre la altura y los procesos térmicos, además de los datos que uno haya obtenido, puede ver la distribución de forma gráfica de algún aspecto deseado.
+\begin{center}
+\includegraphics[width=11cm]{Tephi.png}
+\end{center}
+\end{document}
