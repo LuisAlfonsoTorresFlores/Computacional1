@@ -1,0 +1,195 @@
+\documentclass[a4paper,12pt]{article} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb} 
+\usepackage{graphicx} 
+\usepackage{hyperref} 
+\usepackage{wrapfig}
+\usepackage{enumitem}
+\usepackage{blindtext}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{eurosym}
+\usepackage{color}
+\usepackage{titling}
+\usepackage{amssymb, amsmath, amsbsy} % simbolitos
+ \usepackage{upgreek} % para poner letras griegas sin cursiva
+ \usepackage{cancel} % para tachar
+ \usepackage{mathdots} % para el comando \iddots
+ \usepackage{mathrsfs} % para formato de letra
+\usepackage{stackrel} % para el comando \stackbin
+\usepackage{lipsum}
+\usepackage{tocbibind}
+\usepackage[T1]{fontenc}
+\usepackage[left=3cm,right=3cm,top=3cm,bottom=4cm]{geometry}
+\pagestyle{fancy}
+%%%%%%%%%%%%%%%%%%%%%% CABECERAS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\hsp}{\hspace{20pt}}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\headheight=50pt
+\newcommand{\vacio}{\textcolor{white}{holacaracola}}
+%%% NUMERACION DE ECUACIONES
+\renewcommand{\theequation}{\thesection.\arabic{equation}}
+% COLOR AZUL PARA TEXTOS EN PORTADA
+\definecolor{azulportada}{rgb}{0.16, 0.32, 0.75}
+% Azul para textos de headings
+\definecolor{azulinterior}{rgb}{0.0, 0.2, 0.6}
+
+%%%%%%%%%%%%%%%%%%% DATOS DEL PROYECTO %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Transformada de Fourier}
+\author{}
+\newcommand{\director}{Carlos Lizárraga Celaya}
+
+\begin{document}
+\begin{titlepage}
+\begin{center}
+\vspace{1cm}
+
+\includegraphics[width=5.5cm]{unison-logo.png}
+\\[0.5cm]
+{\fontfamily{phv}\fontsize{24}{6}\selectfont{UNIVERSIDAD DE SONORA}}\\
+[1em]
+{\fontfamily{phv}\fontsize{16}{5}\selectfont{DEPARTAMENTO DE FÍSICA}}\\
+[4em]
+\textcolor{azulportada}
+{\fontfamily{phv}\fontsize{30}{5}\selectfont{\textsc{\thetitle}}}\\
+% Autor del trabajo de investigación
+[1cm]
+{\fontfamily{phv}\fontsize{16}{5}\selectfont{Alumno:}}\\
+[0.2cm]
+%Equipo sfdsfshkfhsfhsjfs
+{\fontfamily{phv}\fontsize{14}{5}\selectfont{Luis Alfonso Torres Flores}}\\
+[1cm]
+%{\Huge\textbf{\thetitle}}\\
+{\fontfamily{phv}\fontsize{16}{5}\selectfont{Profesor}}\\
+[0.2cm]
+{\fontfamily{phv}\fontsize{16}{5}\selectfont{\director}}\\
+[4.5cm]
+{\fontfamily{phv}\fontsize{14}{5}\selectfont{18 de Abril de 2017}}\\
+[4cm]
+\end{center}
+\restoregeometry
+\end{titlepage}
+
+\newpage
+%%%Encabezamiento y pie de página
+\renewcommand{\headrulewidth}{0.5pt}
+\fancyhead[R]{
+	\textcolor{azulinterior}{\fontfamily{phv}\fontsize{14}{4}\selectfont{\textbf{\thetitle}}}\\
+\textcolor{azulportada}{\fontfamily{phv}\fontsize{10}{3}\selectfont{Curso de Fisica computacional}}\\
+{\fontfamily{phv}\fontsize{10}{3}\selectfont{\theauthor}}}
+\fancyhead[L]{\vacio}
+
+\newpage
+\tableofcontents
+\newpage
+%--------------------------------------
+\section{Breve resumen}
+\noindent
+Ya hemos hablado sobre las mareas, hemos analizado como se distribuyen a lo largo del tiempo, pero uno puede llegar a quererlas identificar. Después de utilizar la transformada discreta de Fourier podemos saber los periodos mediante algunas operaciones bastante sencillas, también tenemos una tabla con la que podremos identificar dichas mareas según su periodo.
+%-------------------------------
+\section{Introducción}
+\noindent
+En este trabajo mostraremos el código utilizado para realizar la transformada discreta de Fourier, al igual que el cómo fue empleado nombrando los datos colocados. Dicha transformada será mostrada en forma de una gráfica donde hablaremos sobre que podemos notar en ella y la usaremos para identificar las mareas. Estaremos tratando los datos de enero, febrero y marzo del año 2016 de Baltimore, Maryland y de Topolobampo, Sinaloa, teniendo los datos cada hora obteniendo una gran cantidad de ellos, incapaces de poder revisarlos uno por uno, por lo que se hará uso nuevamente de Python para poderlo trabajar de una manera más cómoda.
+%-------------------------------
+\section{Transformada discreta de Fourier}
+\noindent
+A continuación mostraremos el código empleado para la transformación de Fourier:
+\\[0.5cm]
+
+
+from scipy.fftpack import fft,\\ fftfreq, fftshift
+\# number of signal points\\
+N = 2184\\
+\# sample spacing\\
+T = 1\\
+yf = fft(y)\\
+xf = fftfreq(N, T)\\
+xf = fftshift(xf)\\
+yplot = fftshift(yf)\\
+plt.plot(xf, 1.0/N * np.abs(yplot))\\
+plt.grid(True)\\
+plt.title('Fecha vs Altura Baltimore')\\
+plt.xlabel("Fecha")\\
+plt.ylabel("Altura")\\
+plt.xlim(0,0.00004)\\
+plt.ylim(0,0.1)\\
+fig=plt.gcf()\\
+fig.set\_size\_inches(10,10)\\
+plt.show()
+\\[0.5cm]
+
+\noindent
+Nuestra N es la cantidad de datos que manejaremos, por lo que indicamos que en esos 3 meses tenemos 2184 horas que utilizaremos para graficar, T habla del periodo. Tanto en los datos de Topolobampo como en Baltimore se utilizaron estos apartados de la misma manera, puesto que coincidían en números de datos. Sin embargo, quitando los comandos meramente estéticos para indicar los textos en las gráficas, los limites tuvieron que ser claramente modificados en cada una de las gráficas para poder apreciar en mejor medida los picos que nos interesan.
+%-------------------------------
+\section{Graficas y su analisis}
+
+\begin{center}
+\includegraphics[scale=0.7]{act6balti.png}
+\end{center}
+\newpage
+\noindent
+\textbf{Altura importantes}\\
+\noindent
+array([ 0.23787134,  0.04946012,  0.03144628,  0.05187018,  0.04213037,\\
+        0.05610421,  0.03104957,  0.04621175,  0.03432758,  0.04877159,\\
+        0.03145338,  0.03338159,  0.06828875,  0.06828875,  0.03338159,\\
+        0.03145338,  0.04877159,  0.03432758,  0.04621175,  0.03104957,\\
+        0.05610421,  0.04213037,  0.05187018,  0.03144628,  0.04946012])\\
+\noindent
+\textbf{Horas a la que ocurren}\\
+\noindent
+(array([   0,    4,    6,    7,   11,   12,   14,   18,   24,   29,   30,\\
+          44,  176, 2008, 2140, 2154, 2155, 2160, 2166, 2170, 2172, 2173,\\
+        2177, 2178, 2180]),)
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Altura & Hora & Periodo & Tipo de marea \\ \hline
+0.23787134 & 0 & 4.204 &M$_6$\\ \hline
+0.04946012 & 4 &20.2183 &OO$_1$\\ \hline
+0.03144628 &6 &31.8 &2Q$_1$\\ \hline
+0.05187018 &7 &19.2789 &OO$_1$\\ \hline
+0.04213037 &11 &23.7358 &K$_1$\\ \hline
+0.05610421 &12 &17.824 &OO$_1$\\ \hline
+0.03104957 &14 &32.2066 &2Q$_1$\\ \hline
+0.04621175 &18 &21.6395 &OO$_1$\\ \hline
+0.03432758 &24 &29.1311 &2Q$_1$\\ \hline
+0.04877159 &29 &20.5037 &OO$_1$\\ \hline
+0.03145338 &30 &31.793 &2Q$_1$\\ \hline
+0.03338159 &44 &29.9566 &2Q$_1$\\ \hline
+0.06828875 &176 &14.6437 &2N$_2$\\ \hline
+\end{tabular}
+\end{center}
+
+
+
+\begin{center}
+\includegraphics[scale=0.7]{act6topo.png}
+\end{center}
+\noindent
+\textbf{Altura importantes}\\
+\noindent
+array([ 427.68452381,   60.29357848,   87.40856372,  135.88992176,\\
+        105.12146543,  105.12146543,  135.88992176,   87.40856372,\\
+         60.29357848])\\
+\textbf{Horas a la que ocurren}\\         
+\noindent
+(array([   0,   85,   91,  176,  182, 2002, 2008, 2093, 2099]),)
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Altura & Hora & Periodo & Tipo de marea \\ \hline
+427.68452381 & 0 & 0.2338 & M$_8$\\ \hline
+60.29357848 & 85 &1.6586 &M$_8$\\ \hline
+87.40856372 & 91 &1.144 &M$_8$\\ \hline
+135.88992176 & 176 &0.7359 &M$_8$\\ \hline
+105.12146543 & 182 &0.9513 &M$_8$\\ \hline
+\end{tabular}
+\end{center}
+\end{document}
