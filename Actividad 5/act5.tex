@@ -1,0 +1,167 @@
+\documentclass[a4paper,12pt]{article} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb} 
+\usepackage{graphicx} 
+\usepackage{hyperref} 
+\usepackage{wrapfig}
+\usepackage{enumitem}
+\usepackage{blindtext}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{eurosym}
+\usepackage{color}
+\usepackage{titling}
+\usepackage{amssymb, amsmath, amsbsy} % simbolitos
+ \usepackage{upgreek} % para poner letras griegas sin cursiva
+ \usepackage{cancel} % para tachar
+ \usepackage{mathdots} % para el comando \iddots
+ \usepackage{mathrsfs} % para formato de letra
+\usepackage{stackrel} % para el comando \stackbin
+\usepackage{lipsum}
+\usepackage{tocbibind}
+\usepackage[T1]{fontenc}
+\usepackage[left=3cm,right=3cm,top=3cm,bottom=4cm]{geometry}
+\pagestyle{fancy}
+%%%%%%%%%%%%%%%%%%%%%% CABECERAS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\hsp}{\hspace{20pt}}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\headheight=50pt
+\newcommand{\vacio}{\textcolor{white}{holacaracola}}
+%%% NUMERACION DE ECUACIONES
+\renewcommand{\theequation}{\thesection.\arabic{equation}}
+% COLOR AZUL PARA TEXTOS EN PORTADA
+\definecolor{azulportada}{rgb}{0.16, 0.32, 0.75}
+% Azul para textos de headings
+\definecolor{azulinterior}{rgb}{0.0, 0.2, 0.6}
+
+%%%%%%%%%%%%%%%%%%% DATOS DEL PROYECTO %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Mareas y corrientes}
+\author{}
+\newcommand{\director}{Carlos Lizárraga Celaya}
+
+\begin{document}
+\begin{titlepage}
+\begin{center}
+\vspace{1cm}
+
+\includegraphics[width=5.5cm]{unison-logo.png}
+\\[0.5cm]
+{\fontfamily{phv}\fontsize{24}{6}\selectfont{UNIVERSIDAD DE SONORA}}\\
+[1em]
+{\fontfamily{phv}\fontsize{16}{5}\selectfont{DEPARTAMENTO DE FÍSICA}}\\
+[4em]
+\textcolor{azulportada}
+{\fontfamily{phv}\fontsize{30}{5}\selectfont{\textsc{\thetitle}}}\\
+% Autor del trabajo de investigación
+[1cm]
+{\fontfamily{phv}\fontsize{16}{5}\selectfont{Alumno:}}\\
+[0.2cm]
+%Equipo sfdsfshkfhsfhsjfs
+{\fontfamily{phv}\fontsize{14}{5}\selectfont{Luis Alfonso Torres Flores}}\\
+[1cm]
+%{\Huge\textbf{\thetitle}}\\
+{\fontfamily{phv}\fontsize{16}{5}\selectfont{Profesor}}\\
+[0.2cm]
+{\fontfamily{phv}\fontsize{16}{5}\selectfont{\director}}\\
+[4.5cm]
+{\fontfamily{phv}\fontsize{14}{5}\selectfont{27 de Febrero de 2017}}\\
+[4cm]
+\end{center}
+\restoregeometry
+\end{titlepage}
+
+\newpage
+%%%Encabezamiento y pie de página
+\renewcommand{\headrulewidth}{0.5pt}
+\fancyhead[R]{
+	\textcolor{azulinterior}{\fontfamily{phv}\fontsize{14}{4}\selectfont{\textbf{\thetitle}}}\\
+\textcolor{azulportada}{\fontfamily{phv}\fontsize{10}{3}\selectfont{Curso de Fisica computacional}}\\
+{\fontfamily{phv}\fontsize{10}{3}\selectfont{\theauthor}}}
+\fancyhead[L]{\vacio}
+
+\newpage
+\tableofcontents
+\newpage
+%---------------------------------------------------------------
+\section{Breve resumen}
+\noindent
+Siempre podemos ver a simple vista una ola, el movimiento de las aguas cuando uno visita el mar, sin embargo, siempre es interesante saber qué clase de aspectos tienen que ver con dichos movimientos resultantes en las aguas.
+%--------------------------------------------------------------
+\section{Introducción}
+\noindent
+Podemos hablar de las mareas como el movimiento de las aguas resultantes de diversas fuerzas, algunas de ellas podemos decir que se tratan de la atracción gravitacional de la luna y el sol. Si bien estas fuerzas son aplicadas a todo el planeta, las aguas son mucho más susceptibles a mostrar un cambio debido a su estructura. En este reporte hablaremos sobre las mareas en general y mostraremos un análisis de las aguas de Baltimore, Maryland.
+%-------------------------------------
+\section{Constituyentes de la marea}
+\noindent
+Los constituyentes primarios incluyen la rotación de la Tierra y la intervención del sol y la luna con su fuerza de atracción gravitacional. Cada marea tiene un periodo, aquellas que tienen un periodo menor a 12 horas son llamados constituyentes armónicos, en cambio si su periodo es de varios días, meses o años son llamados constituyentes de periodos largos. 
+\subsection{Principal constituyente lunar semidiurno}
+\noindent
+Su período es de aproximadamente 12 horas y 25,2 minutos, exactamente la mitad de un día lunar de la marea, que es el tiempo medio que separa un cenit lunar de la siguiente, y por lo tanto es el tiempo requerido para que la Tierra gire una vez relativa a la Luna.
+
+\subsection{Rango de variación} 
+\noindent
+El rango de variación se refiere a la diferencia que hay entre la marea alta y la marea baja. Si bien depende de la posición de la luna y el Sol, puesto que sus campos gravitacionales afectan a la amplitud de la marea, tiene un ciclo de 2 semanas aproximadamente.
+
+\subsection{Altitud lunar} 
+\noindent
+La luna al encontrarse en su punto más cercano, llamado perigeo, la altura aumentará, al encontrarse en el punto más alejado, llamado apogeo, la altura disminuirá. Cada 7 ciclos lunares y medio el perigeo coincide con una luna llena, donde sucede la más grande altura de mareas.
+
+\subsection{Otros constituyentes}
+\noindent
+Aquí podemos mencionar los efectos del sol sobre las mareas debido a su fuerza gravitacional, también encontramos a la inclinación del ecuador de la Tierra, su eje de rotación, la forma de la órbita alrededor del Sol y la inclinación de la órbita lunar. 
+
+\subsection{Fase y amplitud}
+\noindent
+Debido a que el constituyente de mareas M2 es el más común, la fase de una marea que es denotada por el tiempo en horas después de marea alta, es bastante útil de saber. Para un océano que puede acabar en alguna costa y se encuentra encerrada en estas en un movimiento circular, puede encontrarse un punto donde se pueden encontrar aguas tanto altas como bajas.
+
+%--------------------------------------
+\section{Física}   
+\subsection{Fuerzas}      
+\noindent
+ La fuerza que la luna produce sobre la Tierra, la cual afecta a las mareas y provoca un movimiento en ellas al igual que es capaz de elevarlas dependiendo de su distancia como bien sabemos. Podemos analizarlo como una suma de vectores, la fuerza que ejerce la Luna a las partículas de agua en cambio la Tierra ejerce una fuerza al agua de la misma manera.
+
+\subsection{Amplitud y periodo}
+\noindent
+La amplitud teórica de las mareas oceánicas causada por la luna es de unos 54 centímetros en el punto más alto, lo que corresponde a la amplitud que se alcanzaría si el océano poseía una profundidad uniforme. El sol también causa mareas, de las cuales la amplitud teórica es de unos 25 centímetros con un periodo de aproximadamente 12 horas. Dado que las órbitas de la Tierra alrededor del Sol y la Luna alrededor de la Tierra son elípticas, las amplitudes de las mareas cambian por las distancias que tiene la Tierra con estos cuerpos masivos, que dependiendo de su posición, varían en menor o mayor medida la amplitud.
+%---------------------------------------------------------------
+\section{Tabla de tipos de marea}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Especies & Simbolo & Periodo (hr) & NOAA orden \\ \hline
+Semidiurno lunar & M$_2$ & 12.4206012 & 1 \\ \hline
+Semidiurno solar & S$_2$ & 12 & 2\\ \hline
+Semidiurno eliptico lunar & N$_2$ & 12.65834751 & 3\\ \hline
+Diurno lunar & K$_1$ & 23.93447213 & 4\\ \hline
+Limite de agua superficial lunar & M$_4$ & 6.210300601 & 5\\ \hline
+Diurno lunar & O$_1$ & 25.81933871 & 6\\ \hline
+Limite de agua superficial lunar & M$_6$ & 4.140200401 & 7\\ \hline
+Agua superficial terdiurno & MK$_3$ & 8.177140247 & 8\\ \hline
+Limite de agua superficial solar & S$_4$ & 6 & 9\\ \hline
+Cuarto de agua superficial diurno & MN$_4$ & 6.269173724 & 10\\
+\hline
+\end{tabular}
+\end{center}
+%--------------------------------------
+\section{Mareas analizadas}
+\begin{center}
+\includegraphics[scale=1]{Balti3.png}
+\end{center}
+
+\noindent
+Esta grafica toma en cuenta los meses de enero, febrero y marzo del 2016 en Baltimore, Maryland. Podemos notar los cambios de la altura de la marea con respecto a las horas que van pasando. Si nos centramos en los picos podremos notar diversos tipos de mareas que constituyen el resultado final que apreciamos en la gráfica. Si revisamos la gráfica mostrada en la NOAA, página de donde se obtuvo los datos utilizados, podremos notar que tiene un gran parecido con ella.
+
+\begin{center}
+\includegraphics[scale=0.7]{la_chila.png}
+\end{center}
+
+\noindent
+Esta grafica toma los mismos meses, pero para Topolobampo, Sinaloa. A diferencia de la anterior esta se pudo obtener mucho más suave notando de mejor manera los máximos y mínimos, al igual que se nota el ciclo que se forma. Podemos ver cómo se va repitiendo conforme pasan los meses.
+
+\end{document}
